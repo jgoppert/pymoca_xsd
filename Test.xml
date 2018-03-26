@@ -25,6 +25,28 @@
     <equations initial="true">
         </equations>
     <equations>
+      <if>
+        <cond><true/></cond>
+        <then>
+          <equal>
+            <ref name="x"/>
+            <float>1</float>
+          </equal>
+        </then>
+        <elseCond><true/></elseCond>
+        <then>
+          <equal>
+            <ref name="x"/>
+            <float>1</float>
+          </equal>
+        </then>
+        <else>
+          <equal>
+            <ref name="x"/>
+            <float>1</float>
+          </equal>
+        </else>
+      </if>
       <equal>
         <ref name="Some">
           <add>
@@ -47,6 +69,15 @@
           </mul>
         </neg>
       </equal>
+      <when>
+        <cond><true/></cond>
+        <then>
+          <equal>
+            <ref name="x"/>
+            <float>1</float>
+          </equal>
+        </then>
+      </when>
     </equations>
     <algorithms initial="true">
       <assign>
@@ -55,6 +86,37 @@
       </assign>
     </algorithms>
     <algorithms>
+      <when>
+        <cond><true/></cond>
+        <then>
+          <assign>
+            <ref name="x"/>
+            <float>1</float>
+          </assign>
+        </then>
+      </when>
+      <if>
+        <cond><true/></cond>
+        <then>
+          <assign>
+            <ref name="x"/>
+            <float>1</float>
+          </assign>
+        </then>
+        <elseCond><true/></elseCond>
+        <then>
+          <assign>
+            <ref name="x"/>
+            <float>1</float>
+          </assign>
+        </then>
+        <else>
+          <assign>
+            <ref name="x"/>
+            <float>1</float>
+          </assign>
+        </else>
+      </if>
       <assign>
         <ref name="x"/>
         <ref name="y"/>
