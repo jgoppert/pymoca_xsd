@@ -2,35 +2,48 @@
 <tns:modelica xmlns:tns="http://www.pymoca.com/Pymoca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pymoca.com/Pymoca Pymoca.xsd ">
   <class encapsulated="true">
     <components visibility="public">
-      <type name="Real" flow="flow" causality="input">
-        <variable/>
-      </type>
+      <declare type="Real" causality="input">
+        <variable name="x">
+          <shape>
+            <int>2</int>
+            <int>2</int>
+          </shape>
+          <modifier/>
+        </variable>
+        <variable name="y"/>
+      </declare>
+      <declare type="Real" variability="parameter">
+        <variable name="c">
+          <shape>
+            <int>2</int>
+            <int>1</int>
+          </shape>
+          <modifier/>
+        </variable>
+      </declare>
     </components>
     <equations initial="true">
         </equations>
     <equations>
       <equal>
         <ref name="Some">
-          <sub>
-            <add>
-              <const>1</const>
-              <const>1</const>
-            </add>
-          </sub>
+          <add>
+            <int>1</int>
+            <int>1</int>
+          </add>
+          <ref name="x"/>
           <slice/>
-          <ref name="Stuff">
-            <sub>
-              <const>1</const>
-            </sub>
+          <subref name="Stuff">
+            <int>1</int>
             <slice/>
-          </ref>
+          </subref>
         </ref>
         <neg>
           <mul>
             <neg>
-              <const>12</const>
+              <int>12</int>
             </neg>
-            <const>12</const>
+            <int>12</int>
           </mul>
         </neg>
       </equal>

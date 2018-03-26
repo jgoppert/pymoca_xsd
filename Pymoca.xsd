@@ -6,11 +6,10 @@
         <complexType>
           <sequence minOccurs="0" maxOccurs="unbounded">
             <choice>
-              <element name="type" type="tns:ComponentClause"/>
+              <element name="declare" type="tns:ComponentClause"/>
             </choice>
           </sequence>
-          <attribute name="visibility" type="tns:VisibilityPrefix" use="optional" default="private">
-                    </attribute>
+          <attribute name="visibility" type="tns:VisibilityPrefix" use="optional" default="private"/>
         </complexType>
       </element>
       <element name="equations" maxOccurs="unbounded" minOccurs="0">
@@ -94,14 +93,12 @@
   </simpleType>
   <complexType name="ComponentClause">
     <sequence>
-      <element name="variable" type="string"/>
+      <element name="variable" minOccurs="0" maxOccurs="unbounded" type="tns:Declaration"/>
     </sequence>
-    <attribute name="name" type="string" use="required"/>
+    <attribute name="type" type="string" use="required"/>
     <attribute name="flow" type="tns:FlowPrefix" use="optional"/>
-    <attribute name="variability" type="tns:VariabilityPrefix" use="optional">
-        </attribute>
-    <attribute name="causality" type="tns:CausalityPrefix" use="optional">
-        </attribute>
+    <attribute name="variability" type="tns:VariabilityPrefix" use="optional"/>
+    <attribute name="causality" type="tns:CausalityPrefix" use="optional"/>
   </complexType>
   <simpleType name="VariabilityPrefix">
     <restriction base="string">
@@ -132,12 +129,12 @@
       <enumeration value=""/>
     </restriction>
   </simpleType>
-  <complexType name="Token">
-    </complexType>
+  <complexType name="Token"/>
   <group name="PrimaryOptions">
     <choice>
       <element name="ref" type="tns:ComponentReference"/>
-      <element name="const" type="float"/>
+      <element name="float" type="float"/>
+      <element name="int" type="int"/>
       <element name="string" type="string"/>
       <element name="true" type="tns:Token"/>
       <element name="false" type="tns:Token"/>
@@ -178,6 +175,17 @@
       <group ref="tns:PrimaryOptions"/>
     </choice>
   </group>
+  <group name="SubscriptsGroup">
+    <sequence>
+      <choice minOccurs="0" maxOccurs="unbounded">
+        <group ref="tns:ExprOptions"/>
+        <element name="slice" type="tns:Token"/>
+      </choice>
+    </sequence>
+  </group>
+  <complexType name="ArraySubscripts">
+    <group ref="tns:SubscriptsGroup"/>
+  </complexType>
   <complexType name="Expr">
     <group ref="tns:ExprOptions"/>
   </complexType>
@@ -186,13 +194,17 @@
   </complexType>
   <complexType name="ComponentReference">
     <sequence>
-      <choice minOccurs="0" maxOccurs="unbounded">
-        <element name="sub" type="tns:Expression"/>
-        <element name="slice" type="tns:Token"/>
-      </choice>
-      <element name="ref" minOccurs="0" type="tns:ComponentReference"/>
+      <group ref="tns:SubscriptsGroup"/>
+      <element name="subref" minOccurs="0" type="tns:ComponentReference"/>
     </sequence>
-    <attribute name="name" type="string"/>
+    <attribute name="name" type="string" use="required"/>
+  </complexType>
+  <complexType name="Declaration">
+    <sequence>
+      <element name="shape" type="tns:ArraySubscripts" minOccurs="0"/>
+      <element name="modifier" type="string" minOccurs="0"/>
+    </sequence>
+    <attribute name="name" type="string" use="required"/>
   </complexType>
 </schema>
 <!-- vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : -->
