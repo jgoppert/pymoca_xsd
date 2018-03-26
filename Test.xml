@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:modelica xmlns:tns="http://www.pymoca.com/Pymoca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pymoca.com/Pymoca Pymoca.xsd ">
-
-	<class encapsulated="true">
-
-		<components visibility="public">
-			<type name="Real" flow="flow" causality="input">
-				<variable/>
-			</type>
-		</components>
-
-		<equations initial="true">
-		</equations>
-
-		<equations>
-			<equal>
-				<ref>x</ref>
-				<neg>
-					<mul>
-						<neg>
-							<float>12</float>
-						</neg>
-						<float>12</float>
-					</mul>
-				</neg>
-			</equal>
-		</equations>
-
-		<algorithms initial="true">
-			<assign>
-				<ref>x</ref>
-				<ref>y</ref>
-			</assign>
-		</algorithms>
-		
-		<algorithms>
-			<assign>
-				<ref>x</ref>
-				<ref>y</ref>
-			</assign>
-		</algorithms>
-
-	</class>
-
+  <class encapsulated="true">
+    <components visibility="public">
+      <type name="Real" flow="flow" causality="input">
+        <variable/>
+      </type>
+    </components>
+    <equations initial="true">
+        </equations>
+    <equations>
+      <equal>
+        <ref name="Some">
+          <sub>
+            <add>
+              <const>1</const>
+              <const>1</const>
+            </add>
+          </sub>
+          <slice/>
+          <ref name="Stuff">
+            <sub>
+              <const>1</const>
+            </sub>
+            <slice/>
+          </ref>
+        </ref>
+        <neg>
+          <mul>
+            <neg>
+              <const>12</const>
+            </neg>
+            <const>12</const>
+          </mul>
+        </neg>
+      </equal>
+    </equations>
+    <algorithms initial="true">
+      <assign>
+        <ref name="x"/>
+        <ref name="y"/>
+      </assign>
+    </algorithms>
+    <algorithms>
+      <assign>
+        <ref name="x"/>
+        <ref name="y"/>
+      </assign>
+    </algorithms>
+  </class>
 </tns:modelica>
 <!-- vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : -->
