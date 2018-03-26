@@ -26,14 +26,18 @@
         </equations>
     <equations>
       <if>
-        <cond><true/></cond>
+        <cond>
+          <true/>
+        </cond>
         <then>
           <equal>
             <ref name="x"/>
             <float>1</float>
           </equal>
         </then>
-        <elseCond><true/></elseCond>
+        <elseCond>
+          <true/>
+        </elseCond>
         <then>
           <equal>
             <ref name="x"/>
@@ -70,7 +74,9 @@
         </neg>
       </equal>
       <when>
-        <cond><true/></cond>
+        <cond>
+          <true/>
+        </cond>
         <then>
           <equal>
             <ref name="x"/>
@@ -87,7 +93,9 @@
     </algorithms>
     <algorithms>
       <when>
-        <cond><true/></cond>
+        <cond>
+          <true/>
+        </cond>
         <then>
           <assign>
             <ref name="x"/>
@@ -96,14 +104,18 @@
         </then>
       </when>
       <if>
-        <cond><true/></cond>
+        <cond>
+          <true/>
+        </cond>
         <then>
           <assign>
             <ref name="x"/>
             <float>1</float>
           </assign>
         </then>
-        <elseCond><true/></elseCond>
+        <elseCond>
+          <true/>
+        </elseCond>
         <then>
           <assign>
             <ref name="x"/>
