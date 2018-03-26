@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:modelica xmlns:tns="http://www.pymoca.com/Pymoca"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.pymoca.com/Pymoca Pymoca.xsd ">
+<tns:modelica xmlns:tns="http://www.pymoca.com/Pymoca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pymoca.com/Pymoca Pymoca.xsd ">
 
 	<class encapsulated="true">
 
 		<components visibility="public">
 			<type name="Real" flow="flow" causality="input">
-				<variable />
+				<variable/>
 			</type>
 		</components>
 
