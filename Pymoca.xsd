@@ -54,7 +54,7 @@
       <element name="for" type="string"/>
       <element name="connect" type="string"/>
       <element name="when" type="tns:EquationBranch"/>
-      <element name="call" type="string"/>
+      <element name="function" type="string"/>
     </choice>
   </group>
   <complexType name="EquationList">
@@ -65,7 +65,7 @@
   <group name="StatementOptions">
     <choice>
       <element name="assign" type="tns:ExprTwoArg"/>
-      <element name="call" type="string"/>
+      <element name="function" type="string"/>
       <element name="break" type="tns:Token"/>
       <element name="return" type="tns:Token"/>
       <element name="if" type="tns:StatementBranch"/>
@@ -148,7 +148,7 @@
       <element name="string" type="string"/>
       <element name="true" type="tns:Token"/>
       <element name="false" type="tns:Token"/>
-      <element name="call" type="string"/>
+      <element name="function" type="string"/>
       <element name="der" type="tns:ExprOneArg"/>
       <element name="initial" type="string"/>
       <element name="output" type="string"/>

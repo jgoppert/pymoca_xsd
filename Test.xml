@@ -23,7 +23,7 @@
       </declare>
     </components>
     <equations initial="true">
-        </equations>
+    </equations>
     <equations>
       <if>
         <cond>
