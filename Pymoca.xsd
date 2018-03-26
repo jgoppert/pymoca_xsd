@@ -52,7 +52,7 @@
 
     <group name="EquationList">
         <choice>
-            <element name="equal" type="tns:Expr"/>
+            <element name="equal" type="tns:ExprTwoArg"/>
             <element name="if" type="string"/>
             <element name="for" type="string"/>
             <element name="connect" type="string"/>
@@ -63,10 +63,10 @@
     
     <group name="StatementList">
         <choice>
-            <element name="assign" type="string"/>
+            <element name="assign" type="tns:ExprTwoArg"/>
             <element name="call" type="string"/>
-            <element name="break" type="string"/>
-            <element name="return" type="string"/>
+            <element name="break" type="tns:Token"/>
+            <element name="return" type="tns:Token"/>
             <element name="if" type="string"/>
             <element name="for" type="string"/>
             <element name="while" type="string"/>
@@ -153,6 +153,7 @@
     
     <group name="PrimaryOptions">
         <choice>
+            <element name="ref" type="string"/>
             <element name="float" type="float"/>
             <element name="string" type="string"/>
             <element name="true" type="tns:Token"/>
