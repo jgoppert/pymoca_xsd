@@ -1,155 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.pymoca.com/Pymoca" targetNamespace="http://www.pymoca.com/Pymoca">
     <complexType name="ClassDefinition">
-    	<sequence>
-    		<element name="components" maxOccurs="unbounded" minOccurs="0">
-			    <complexType>
-			    	<sequence minOccurs="0" maxOccurs="unbounded">
-						<choice>
-				    		<element name="type" type="tns:ComponentClause"></element>    		
-				    	</choice> 
-			    	</sequence>
-			    	<attribute name="visibility" type="tns:VisibilityPrefix"
-			    		use="optional" default="private">
-			    	</attribute>
-			    </complexType>
+        <sequence>
+            <element name="components" maxOccurs="unbounded" minOccurs="0">
+                <complexType>
+                    <sequence minOccurs="0" maxOccurs="unbounded">
+                        <choice>
+                            <element name="type" type="tns:ComponentClause"></element>          
+                        </choice> 
+                    </sequence>
+                    <attribute name="visibility" type="tns:VisibilityPrefix"
+                        use="optional" default="private">
+                    </attribute>
+                </complexType>
             </element>
-    		<element name="equations" maxOccurs="unbounded"
-    			minOccurs="0">
-			    <complexType>
-			    	<sequence minOccurs="0" maxOccurs="unbounded">
-			    		<group ref="tns:EquationList"/>
-			    	</sequence>
-			    	<attribute name="initial" type="boolean"></attribute>
-			    </complexType>
-    		</element>
-    		<element name="algorithms" maxOccurs="unbounded"
-    			minOccurs="0">
-			    <complexType>
-			    	<sequence minOccurs="0" maxOccurs="unbounded">
-			    		<group ref="tns:StatementList"/>
-			    	</sequence>
-			    	<attribute name="initial" type="boolean"></attribute>
-			    </complexType>
-    		</element>
-    	</sequence>
-    	<attribute name="encapsulated" type="boolean"></attribute>
-    	<attribute name="partial" type="string"></attribute>
-    	<attribute name="kind" type="string"></attribute>
-    	<attribute name="name" type="string"></attribute>
+            <element name="equations" maxOccurs="unbounded"
+                minOccurs="0">
+                <complexType>
+                    <sequence minOccurs="0" maxOccurs="unbounded">
+                        <group ref="tns:EquationList"/>
+                    </sequence>
+                    <attribute name="initial" type="boolean"></attribute>
+                </complexType>
+            </element>
+            <element name="algorithms" maxOccurs="unbounded"
+                minOccurs="0">
+                <complexType>
+                    <sequence minOccurs="0" maxOccurs="unbounded">
+                        <group ref="tns:StatementList"/>
+                    </sequence>
+                    <attribute name="initial" type="boolean"></attribute>
+                </complexType>
+            </element>
+        </sequence>
+        <attribute name="encapsulated" type="boolean"></attribute>
+        <attribute name="partial" type="string"></attribute>
+        <attribute name="kind" type="string"></attribute>
+        <attribute name="name" type="string"></attribute>
     </complexType>
 
     <complexType name="StoredDefinition">
-    	<sequence>
-    		<element name="class" maxOccurs="unbounded" minOccurs="0">
-    			<complexType>
-    				<complexContent>
-    					<extension base="tns:ClassDefinition">
-    						<attribute name="final" type="string"></attribute>
-    					</extension>
-    				</complexContent>
-    			</complexType>
-    		</element>
-    	</sequence>
+        <sequence>
+            <element name="class" maxOccurs="unbounded" minOccurs="0">
+                <complexType>
+                    <complexContent>
+                        <extension base="tns:ClassDefinition">
+                            <attribute name="final" type="string"></attribute>
+                        </extension>
+                    </complexContent>
+                </complexType>
+            </element>
+        </sequence>
     </complexType>
 
     <group name="EquationList">
-    	<choice>
-    		<element name="equal" type="tns:Expr"></element>
+        <choice>
+            <element name="equal" type="tns:Expr"></element>
             <element name="if" type="string"></element>
             <element name="for" type="string"></element>
-    		<element name="connect" type="string"></element>
-    		<element name="when" type="string"></element>
-    		<element name="call" type="string"></element>
-    	</choice>
+            <element name="connect" type="string"></element>
+            <element name="when" type="string"></element>
+            <element name="call" type="string"></element>
+        </choice>
     </group>
     
     <group name="StatementList">
-    	<choice>
-    		<element name="assign" type="string"></element>
+        <choice>
+            <element name="assign" type="string"></element>
             <element name="call" type="string"></element>
             <element name="break" type="string"></element>
             <element name="return" type="string"></element>
             <element name="if" type="string"></element>
             <element name="for" type="string"></element>
-    		<element name="while" type="string"></element>
-    		<element name="when" type="string"></element>
-    	</choice>
+            <element name="while" type="string"></element>
+            <element name="when" type="string"></element>
+        </choice>
     </group>
 
     <element name="modelica" type="tns:StoredDefinition"></element>
 
     <simpleType name="ClassPrefix">
-    	<restriction base="string">
-    		<enumeration value="model"></enumeration>
-    		<enumeration value="record"></enumeration>
-    		<enumeration value="operator record"></enumeration>
-    		<enumeration value="connector"></enumeration>
-    		<enumeration value="expandable connector"></enumeration>
-    		<enumeration value="type"></enumeration>
-    		<enumeration value="package"></enumeration>
-    		<enumeration value="function"></enumeration>
-    		<enumeration value="operator function"></enumeration>
-    		<enumeration value="operator"></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="model"></enumeration>
+            <enumeration value="record"></enumeration>
+            <enumeration value="operator record"></enumeration>
+            <enumeration value="connector"></enumeration>
+            <enumeration value="expandable connector"></enumeration>
+            <enumeration value="type"></enumeration>
+            <enumeration value="package"></enumeration>
+            <enumeration value="function"></enumeration>
+            <enumeration value="operator function"></enumeration>
+            <enumeration value="operator"></enumeration>
+        </restriction>
     </simpleType>
 
     <simpleType name="VisibilityPrefix">
-    	<restriction base="string">
-    		<enumeration value="public"></enumeration>
-    		<enumeration value="private"></enumeration>
-    		<enumeration value="protected"></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="public"></enumeration>
+            <enumeration value="private"></enumeration>
+            <enumeration value="protected"></enumeration>
+        </restriction>
     </simpleType>
 
 
     <complexType name="ComponentClause">
-    	<sequence>
-    		<element name="variable" type="string"></element>
-    	</sequence>
-    	<attribute name="name" type="string" use="required"></attribute>
-    	<attribute name="flow" type="tns:FlowPrefix" use="optional"></attribute>
-    	<attribute name="variability" type="tns:VariabilityPrefix"
-    		use="optional">
-    	</attribute>
-    	<attribute name="causality" type="tns:CausalityPrefix"
-    		use="optional">
-    	</attribute>
+        <sequence>
+            <element name="variable" type="string"></element>
+        </sequence>
+        <attribute name="name" type="string" use="required"></attribute>
+        <attribute name="flow" type="tns:FlowPrefix" use="optional"></attribute>
+        <attribute name="variability" type="tns:VariabilityPrefix"
+            use="optional">
+        </attribute>
+        <attribute name="causality" type="tns:CausalityPrefix"
+            use="optional">
+        </attribute>
     </complexType>
 
 
     <simpleType name="VariabilityPrefix">
-    	<restriction base="string">
-    		<enumeration value="discrete"></enumeration>
-    		<enumeration value="parameter"></enumeration>
-    		<enumeration value="constant"></enumeration>
-    	    <enumeration value=""></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="discrete"></enumeration>
+            <enumeration value="parameter"></enumeration>
+            <enumeration value="constant"></enumeration>
+            <enumeration value=""></enumeration>
+        </restriction>
     </simpleType>
 
     <simpleType name="CausalityPrefix">
-    	<restriction base="string">
-    		<enumeration value="input"></enumeration>
-    		<enumeration value="output"></enumeration>
-    		<enumeration value=""></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="input"></enumeration>
+            <enumeration value="output"></enumeration>
+            <enumeration value=""></enumeration>
+        </restriction>
     </simpleType>
 
 
     <simpleType name="FlowPrefix">
-    	<restriction base="string">
-    		<enumeration value="flow"></enumeration>
-    		<enumeration value="stream"></enumeration>
-    		<enumeration value="non-flow"></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="flow"></enumeration>
+            <enumeration value="stream"></enumeration>
+            <enumeration value="non-flow"></enumeration>
+        </restriction>
     </simpleType>
 
     <simpleType name="PurityPrefix">
-    	<restriction base="string">
-    		<enumeration value="pure"></enumeration>
-    		<enumeration value="impure"></enumeration>
-    		<enumeration value=""></enumeration>
-    	</restriction>
+        <restriction base="string">
+            <enumeration value="pure"></enumeration>
+            <enumeration value="impure"></enumeration>
+            <enumeration value=""></enumeration>
+        </restriction>
     </simpleType>
 
 
@@ -157,57 +157,59 @@
     </complexType>
     
     <group name="PrimaryOptions">
-    	<choice>
-    		<element name="float" type="float"></element>
-    		<element name="string" type="string"></element>
-    		<element name="true" type="tns:Token"></element>
-    		<element name="false" type="tns:Token"></element>
-    		<element name="call" type="string"></element>
-    		<element name="der" type="tns:ExprOneArg"></element>
-    		<element name="initial" type="string"></element>
-    		<element name="output" type="string"></element>
-    		<element name="list" type="string"></element>
-    		<element name="args" type="string"></element>
-    		<element name="end" type="tns:Token"></element>
-    	</choice>
+        <choice>
+            <element name="float" type="float"></element>
+            <element name="string" type="string"></element>
+            <element name="true" type="tns:Token"></element>
+            <element name="false" type="tns:Token"></element>
+            <element name="call" type="string"></element>
+            <element name="der" type="tns:ExprOneArg"></element>
+            <element name="initial" type="string"></element>
+            <element name="output" type="string"></element>
+            <element name="list" type="string"></element>
+            <element name="args" type="string"></element>
+            <element name="end" type="tns:Token"></element>
+        </choice>
     </group>
    
     <complexType name="ExprOneArg">
-    	<sequence minOccurs="1" maxOccurs="1">
-    		<group ref="tns:ExprOptions"/>
-    	</sequence>
+        <sequence minOccurs="1" maxOccurs="1">
+            <group ref="tns:ExprOptions"/>
+        </sequence>
     </complexType>
 
     <complexType name="ExprTwoArg">
-    	<sequence minOccurs="2" maxOccurs="2">
-    		<group ref="tns:ExprOptions"/>
-    	</sequence>
+        <sequence minOccurs="2" maxOccurs="2">
+            <group ref="tns:ExprOptions"/>
+        </sequence>
     </complexType>
 
 
     <complexType name="ExprAnyArg">
-    	<sequence minOccurs="0" maxOccurs="unbounded">
-    		<group ref="tns:ExprOptions"/>
-    	</sequence>
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <group ref="tns:ExprOptions"/>
+        </sequence>
     </complexType>
 
     <group name="ExprOptions">
-    	<choice>
-    	    <element name="neg" type="tns:ExprOneArg"></element>
-    	    <element name="exp" type="tns:ExprOneArg"></element>
-    		<element name="mul" type="tns:ExprTwoArg"></element>
-    		<element name="add" type="tns:ExprTwoArg"></element>
-    		<element name="rel" type="tns:ExprTwoArg"></element>
-    		<element name="not" type="tns:ExprOneArg"></element>
-    		<element name="and" type="tns:ExprTwoArg"></element>
-    		<element name="or" type="tns:ExprTwoArg"></element>
-    		<group ref="tns:PrimaryOptions"/>
-    	</choice>
+        <choice>
+            <element name="neg" type="tns:ExprOneArg"></element>
+            <element name="exp" type="tns:ExprOneArg"></element>
+            <element name="mul" type="tns:ExprTwoArg"></element>
+            <element name="add" type="tns:ExprTwoArg"></element>
+            <element name="rel" type="tns:ExprTwoArg"></element>
+            <element name="not" type="tns:ExprOneArg"></element>
+            <element name="and" type="tns:ExprTwoArg"></element>
+            <element name="or" type="tns:ExprTwoArg"></element>
+            <group ref="tns:PrimaryOptions"/>
+        </choice>
     </group>
     
     <complexType name="Expr">
-    	<group ref="tns:ExprOptions"/>
+        <group ref="tns:ExprOptions"/>
     </complexType>
 
 
 </schema>
+
+<!-- vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 : -->
