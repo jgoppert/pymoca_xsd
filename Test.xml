@@ -25,6 +25,10 @@
     <equations initial="true">
     </equations>
     <equations>
+      <connect>
+        <ref name="x"/>
+        <ref name="x"/>
+      </connect>
       <if>
         <cond>
           <true/>
