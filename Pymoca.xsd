@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.pymoca.com/Pymoca" targetNamespace="http://www.pymoca.com/Pymoca">
+  <!--======================================================================-->
+  <!-- Root Element -->
+  <!--======================================================================-->
+  <element name="modelica" type="tns:StoredDefinition"/>
+  <complexType name="StoredDefinition">
+    <sequence>
+      <element name="class" maxOccurs="unbounded" minOccurs="0">
+        <complexType>
+          <complexContent>
+            <extension base="tns:ClassDefinition">
+              <attribute name="final" type="string"/>
+            </extension>
+          </complexContent>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <!--======================================================================-->
+  <!-- Class -->
+  <!--======================================================================-->
   <complexType name="ClassDefinition">
     <sequence>
       <element name="components" maxOccurs="unbounded" minOccurs="0">
@@ -34,19 +54,9 @@
     <attribute name="kind" type="string"/>
     <attribute name="name" type="string"/>
   </complexType>
-  <complexType name="StoredDefinition">
-    <sequence>
-      <element name="class" maxOccurs="unbounded" minOccurs="0">
-        <complexType>
-          <complexContent>
-            <extension base="tns:ClassDefinition">
-              <attribute name="final" type="string"/>
-            </extension>
-          </complexContent>
-        </complexType>
-      </element>
-    </sequence>
-  </complexType>
+  <!-- ==================================================================== -->
+  <!-- Equations -->
+  <!-- ==================================================================== -->
   <group name="EquationOptions">
     <choice>
       <element name="equal" type="tns:ExprTwoArg"/>
@@ -62,6 +72,25 @@
       <group ref="tns:EquationOptions" minOccurs="1" maxOccurs="unbounded"/>
     </sequence>
   </complexType>
+  <complexType name="EquationBranch">
+    <sequence>
+      <element name="cond" type="tns:Expr"/>
+      <element name="then" type="tns:EquationList"/>
+      <sequence minOccurs="0" maxOccurs="unbounded">
+        <element name="elseCond" type="tns:Expr"/>
+        <element name="then" type="tns:EquationList"/>
+      </sequence>
+      <element name="else" minOccurs="0" type="tns:EquationList"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConnectEquation">
+    <sequence minOccurs="2" maxOccurs="2">
+      <element name="ref" type="tns:ComponentReference"/>
+    </sequence>
+  </complexType>
+  <!-- ==================================================================== -->
+  <!-- Statements -->
+  <!-- ==================================================================== -->
   <group name="StatementOptions">
     <choice>
       <element name="assign" type="tns:ExprTwoArg"/>
@@ -79,7 +108,20 @@
       <group ref="tns:StatementOptions" minOccurs="1" maxOccurs="unbounded"/>
     </sequence>
   </complexType>
-  <element name="modelica" type="tns:StoredDefinition"/>
+  <complexType name="StatementBranch">
+    <sequence>
+      <element name="cond" type="tns:Expr"/>
+      <element name="then" type="tns:StatementList"/>
+      <sequence minOccurs="0" maxOccurs="unbounded">
+        <element name="elseCond" type="tns:Expr"/>
+        <element name="then" type="tns:StatementList"/>
+      </sequence>
+      <element name="else" minOccurs="0" type="tns:StatementList"/>
+    </sequence>
+  </complexType>
+  <!--======================================================================-->
+  <!-- Statements -->
+  <!--======================================================================-->
   <simpleType name="ClassPrefix">
     <restriction base="string">
       <enumeration value="model"/>
@@ -94,13 +136,6 @@
       <enumeration value="operator"/>
     </restriction>
   </simpleType>
-  <simpleType name="VisibilityPrefix">
-    <restriction base="string">
-      <enumeration value="public"/>
-      <enumeration value="private"/>
-      <enumeration value="protected"/>
-    </restriction>
-  </simpleType>
   <complexType name="ComponentClause">
     <sequence>
       <element name="variable" minOccurs="0" maxOccurs="unbounded" type="tns:Declaration"/>
@@ -110,6 +145,16 @@
     <attribute name="variability" type="tns:VariabilityPrefix" use="optional"/>
     <attribute name="causality" type="tns:CausalityPrefix" use="optional"/>
   </complexType>
+  <!--======================================================================-->
+  <!-- Prefixes -->
+  <!--======================================================================-->
+  <simpleType name="VisibilityPrefix">
+    <restriction base="string">
+      <enumeration value="public"/>
+      <enumeration value="private"/>
+      <enumeration value="protected"/>
+    </restriction>
+  </simpleType>
   <simpleType name="VariabilityPrefix">
     <restriction base="string">
       <enumeration value="discrete"/>
@@ -139,6 +184,9 @@
       <enumeration value=""/>
     </restriction>
   </simpleType>
+  <!--======================================================================-->
+  <!-- Expressions -->
+  <!--======================================================================-->
   <complexType name="Token"/>
   <group name="PrimaryOptions">
     <choice>
@@ -208,6 +256,9 @@
   <complexType name="Expression">
     <group ref="tns:ExprOptions"/>
   </complexType>
+  <!--======================================================================-->
+  <!-- Components -->
+  <!--======================================================================-->
   <complexType name="ComponentReference">
     <sequence>
       <group ref="tns:SubscriptsGroup"/>
@@ -221,33 +272,6 @@
       <element name="modification" type="tns:Modification" minOccurs="0"/>
     </sequence>
     <attribute name="name" type="string" use="required"/>
-  </complexType>
-  <complexType name="EquationBranch">
-    <sequence>
-      <element name="cond" type="tns:Expr"/>
-      <element name="then" type="tns:EquationList"/>
-      <sequence minOccurs="0" maxOccurs="unbounded">
-        <element name="elseCond" type="tns:Expr"/>
-        <element name="then" type="tns:EquationList"/>
-      </sequence>
-      <element name="else" minOccurs="0" type="tns:EquationList"/>
-    </sequence>
-  </complexType>
-  <complexType name="StatementBranch">
-    <sequence>
-      <element name="cond" type="tns:Expr"/>
-      <element name="then" type="tns:StatementList"/>
-      <sequence minOccurs="0" maxOccurs="unbounded">
-        <element name="elseCond" type="tns:Expr"/>
-        <element name="then" type="tns:StatementList"/>
-      </sequence>
-      <element name="else" minOccurs="0" type="tns:StatementList"/>
-    </sequence>
-  </complexType>
-  <complexType name="ConnectEquation">
-    <sequence minOccurs="2" maxOccurs="2">
-      <element name="ref" type="tns:ComponentReference"/>
-    </sequence>
   </complexType>
   <complexType name="Modification">
     <sequence>
