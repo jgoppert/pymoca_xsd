@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:modelica xmlns:tns="http://www.pymoca.com/Pymoca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.pymoca.com/Pymoca Pymoca.xsd ">
-  <class encapsulated="true">
+  <class name="test" type="model">
     <components visibility="public">
       <declare type="Real" causality="input">
         <variable name="x">
@@ -61,16 +61,20 @@
       </if>
       <equal>
         <ref name="Some">
-          <add>
-            <int>1</int>
-            <int>1</int>
-          </add>
-          <ref name="x"/>
-          <slice/>
-          <subref name="Stuff">
-            <int>1</int>
+          <index>
+            <add>
+              <int>1</int>
+              <int>1</int>
+            </add>
+            <ref name="x"/>
             <slice/>
-          </subref>
+          </index>
+          <ref name="Stuff">
+            <index>
+              <int>1</int>
+              <slice/>
+            </index>
+          </ref>
         </ref>
         <neg>
           <mul>

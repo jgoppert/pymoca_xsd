@@ -6,15 +6,8 @@
   <element name="modelica" type="tns:StoredDefinition"/>
   <complexType name="StoredDefinition">
     <sequence>
-      <element name="class" maxOccurs="unbounded" minOccurs="0">
-        <complexType>
-          <complexContent>
-            <extension base="tns:ClassDefinition">
-              <attribute name="final" type="string"/>
-            </extension>
-          </complexContent>
-        </complexType>
-      </element>
+      <element name="within" type="string" minOccurs="0"/>
+      <element name="class" maxOccurs="unbounded" type="tns:ClassDefinition"/>
     </sequence>
   </complexType>
   <!--======================================================================-->
@@ -49,11 +42,27 @@
         </complexType>
       </element>
     </sequence>
+    <attribute name="name" use="required" type="string"/>
+    <attribute name="final" type="boolean"/>
     <attribute name="encapsulated" type="boolean"/>
-    <attribute name="partial" type="string"/>
-    <attribute name="kind" type="string"/>
-    <attribute name="name" type="string"/>
+    <attribute name="partial" type="boolean"/>
+    <attribute name="type" type="tns:ClassPrefix"/>
   </complexType>
+  <simpleType name="ClassPrefix">
+    <restriction base="string">
+      <enumeration value="class"/>
+      <enumeration value="model"/>
+      <enumeration value="record"/>
+      <enumeration value="operator record"/>
+      <enumeration value="connector"/>
+      <enumeration value="expandable connector"/>
+      <enumeration value="type"/>
+      <enumeration value="package"/>
+      <enumeration value="function"/>
+      <enumeration value="operator function"/>
+      <enumeration value="operator"/>
+    </restriction>
+  </simpleType>
   <!-- ==================================================================== -->
   <!-- Equations -->
   <!-- ==================================================================== -->
@@ -93,7 +102,7 @@
   <!-- ==================================================================== -->
   <group name="StatementOptions">
     <choice>
-      <element name="assign" type="tns:ExprTwoArg"/>
+      <element name="assign" type="tns:Assignment"/>
       <element name="function" type="string"/>
       <element name="break" type="tns:Token"/>
       <element name="return" type="tns:Token"/>
@@ -122,20 +131,6 @@
   <!--======================================================================-->
   <!-- Statements -->
   <!--======================================================================-->
-  <simpleType name="ClassPrefix">
-    <restriction base="string">
-      <enumeration value="model"/>
-      <enumeration value="record"/>
-      <enumeration value="operator record"/>
-      <enumeration value="connector"/>
-      <enumeration value="expandable connector"/>
-      <enumeration value="type"/>
-      <enumeration value="package"/>
-      <enumeration value="function"/>
-      <enumeration value="operator function"/>
-      <enumeration value="operator"/>
-    </restriction>
-  </simpleType>
   <complexType name="ComponentClause">
     <sequence>
       <element name="variable" minOccurs="0" maxOccurs="unbounded" type="tns:Declaration"/>
@@ -261,8 +256,8 @@
   <!--======================================================================-->
   <complexType name="ComponentReference">
     <sequence>
-      <group ref="tns:SubscriptsGroup"/>
-      <element name="subref" minOccurs="0" type="tns:ComponentReference"/>
+      <element name="index" minOccurs="0" type="tns:ArraySubscripts"/>
+      <element name="ref" minOccurs="0" type="tns:ComponentReference"/>
     </sequence>
     <attribute name="name" type="string" use="required"/>
   </complexType>
