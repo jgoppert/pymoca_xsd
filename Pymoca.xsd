@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.pymoca.com/Pymoca" targetNamespace="http://www.pymoca.com/Pymoca">
-    <complexType name="ClassDefinition">
+  <complexType name="ClassDefinition">
     <sequence>
       <element name="components" maxOccurs="unbounded" minOccurs="0">
         <complexType>
@@ -245,8 +245,7 @@
     </sequence>
   </complexType>
   <complexType name="ConnectEquation">
-    <sequence>
-      <element name="ref" type="tns:ComponentReference"/>
+    <sequence minOccurs="2" maxOccurs="2">
       <element name="ref" type="tns:ComponentReference"/>
     </sequence>
   </complexType>
