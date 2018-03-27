@@ -8,7 +8,6 @@
             <int>2</int>
             <int>2</int>
           </shape>
-          <modifier/>
         </variable>
         <variable name="y"/>
       </declare>
@@ -18,7 +17,12 @@
             <int>2</int>
             <int>1</int>
           </shape>
-          <modifier/>
+          <modification>
+            <assign>
+              <ref name="start"/>
+              <int>2</int>
+            </assign>
+          </modification>
         </variable>
       </declare>
     </components>
